@@ -10,6 +10,13 @@ pipeline {
   
   stages {
   
+    
+
+    stage('Cloning Git') {
+      steps {
+        git credentialsId: 'GitHub', url: 'https://github.com/patel0ankur/CalculatorLibrary.git'
+      }
+    }
     stage('Tagging') {
             steps {
 		    sh('git tag -a ${GIT_TAG} -m "tagging"')
@@ -17,13 +24,7 @@ pipeline {
               echo "Tagging: ${GIT_TAG}"
                 }
             }
-
-    stage('Cloning Git') {
-      steps {
-        git credentialsId: 'GitHub', url: 'https://github.com/patel0ankur/CalculatorLibrary.git'
-      }
-    }
-    
+	  
     stage('Install Requirements'){
       steps {
         sh 'sudo pip3.6 install -r requirements.txt'
