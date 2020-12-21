@@ -12,7 +12,7 @@ pipeline {
   
     stage('Tagging') {
             steps {
-			 sh('git tag -a ${GIT_TAG}')
+			 sh('git tag -a ${GIT_TAG}' -m "Tagging the file")
 			 sh('git push --tags') 
 			  
               echo "Tagging: ${GIT_TAG}"
