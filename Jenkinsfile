@@ -3,7 +3,7 @@ pipeline {
   environment {
         def BUILDDATE = sh(script: "echo `date +%s`", returnStdout: true).trim()
         def jobBaseName = "${env.JOB_NAME}".split('/').last()
-        GIT_TAG = "$jobBaseName-$BUILD_NUMBER-$BUILDDATE"
+        GIT_TAG = "$jobBaseName-$BUILDDATE-$BUILD_NUMBER"
                 
     }
   
@@ -12,6 +12,9 @@ pipeline {
   
     stage('Tagging') {
             steps {
+			 sh('git tag -a ${GIT_TAG}')
+			 sh('git push --tags') 
+			  
               echo "Tagging: ${GIT_TAG}"
                 }
             }
