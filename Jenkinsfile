@@ -1,6 +1,20 @@
 pipeline {
   agent any
+  environment {
+        def BUILDDATE = sh(script: "echo `date +%s`", returnStdout: true).trim()
+        def jobBaseName = "${env.JOB_NAME}".split('/').last()
+        GIT_TAG = "$jobBaseName-$BUILD_NUMBER-$BUILDDATE"
+                
+    }
+  
+  
   stages {
+  
+    stage('Tagging') {
+            steps {
+              echo "Tagging: ${GIT_TAG}"
+                }
+            }
 
     stage('Cloning Git') {
       steps {
