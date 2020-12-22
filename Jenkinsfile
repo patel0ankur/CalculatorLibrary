@@ -4,7 +4,7 @@ pipeline {
         // BUILDDATE = currentDate.format("yyyy-MM-dd")
         //def jobBaseName = "${env.JOB_NAME}".split('/').last()
         GIT_TAG = "$JOB_NAME-$BUILD_TIMESTAMP-$BUILD_NUMBER"
-	//def repositoryUrl = scm.userRemoteConfigs[0].url 
+	def repositoryUrl = scm.userRemoteConfigs[0].url 
                 
     }
   
@@ -17,7 +17,7 @@ pipeline {
 		   sh('git tag -f -a ${GIT_TAG} -m "tagging"')
 		   sh('git tag -l')
 		   //sh('git push -f origin refs/tags/${GIT_TAG}') 
-		    //sh('git push https://${pass}:${user}@<REPO> --tags')
+		    sh('git push https://${pass}:${user}@${repositoryUrl} --tags')
 		  }
       }
     }
