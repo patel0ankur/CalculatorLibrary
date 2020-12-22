@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-        def BUILDDATE = sh(script: "echo `date +%s`", returnStdout: true).trim()
+        BUILDDATE = java.time.LocalDateTime.now()
         //def jobBaseName = "${env.JOB_NAME}".split('/').last()
         GIT_TAG = "$JOB_NAME-$GIT_BRANCH-$BUILDDATE-$BUILD_NUMBER"
                 
@@ -17,7 +17,7 @@ pipeline {
         git credentialsId: 'GitHub', url: 'https://github.com/patel0ankur/CalculatorLibrary.git'
 	    //sh('git tag -a ${GIT_TAG} -m "tagging"')
 	    sh('git tag ${BUILD_TAG}') 
-            //sh('git push origin ${GIT_TAG}')   
+            sh('git push origin ${BUILD_TAG}')   
               
       }
     }
