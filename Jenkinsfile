@@ -14,7 +14,8 @@ pipeline {
 	    sh('git tag -f -a ${GIT_TAG} -m "tagging"')
 	    withCredentials([usernamePassword(credentialsId: 'GitHub', passwordVariable: 'pass', usernameVariable: 'user')]) {
 		   sh('git tag -f -a ${GIT_TAG} -m "tagging"')
-		   sh('git push -f origin ${GIT_TAG}') 
+		   sh('git tag -l')
+		   //sh('git push -f origin ${GIT_TAG}') 
 		    //sh('git push https://${pass}:${user}@<REPO> --tags')
 		  }
       }
