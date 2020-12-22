@@ -2,8 +2,8 @@ pipeline {
   agent any
   environment {
         def BUILDDATE = sh(script: "echo `date +%s`", returnStdout: true).trim()
-        def jobBaseName = "${env.JOB_NAME}".split('/').last()
-        GIT_TAG = "$jobBaseName-$BUILDDATE-$BUILD_NUMBER"
+        //def jobBaseName = "${env.JOB_NAME}".split('/').last()
+        GIT_TAG = "$JOB_NAME-$GIT_BRANCH-$BUILDDATE-$BUILD_NUMBER"
                 
     }
   
@@ -15,8 +15,8 @@ pipeline {
     stage('Cloning Git') {
       steps {
         git credentialsId: 'GitHub', url: 'https://github.com/patel0ankur/CalculatorLibrary.git'
-	    sh('git tag -a ${GIT_TAG} -m "tagging"')
-            sh('git push origin ${GIT_TAG}')   
+	   // sh('git tag -a ${GIT_TAG} -m "tagging"')
+            //sh('git push origin ${GIT_TAG}')   
               
       }
     }
