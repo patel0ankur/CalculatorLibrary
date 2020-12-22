@@ -4,6 +4,7 @@ pipeline {
         // BUILDDATE = currentDate.format("yyyy-MM-dd")
         //def jobBaseName = "${env.JOB_NAME}".split('/').last()
         GIT_TAG = "$JOB_NAME-$BUILD_TIMESTAMP-$BUILD_NUMBER"
+	//def repositoryUrl = scm.userRemoteConfigs[0].url 
                 
     }
   
@@ -11,11 +12,11 @@ pipeline {
 
     stage('Cloning Git') {
       steps {
-	    sh('git tag -f -a ${GIT_TAG} -m "tagging"')
+	    //sh('git tag -f -a ${GIT_TAG} -m "tagging"')
 	    withCredentials([usernamePassword(credentialsId: 'GitHub', passwordVariable: 'pass', usernameVariable: 'user')]) {
 		   sh('git tag -f -a ${GIT_TAG} -m "tagging"')
 		   sh('git tag -l')
-		   sh('git push -f origin ${GIT_TAG}') 
+		   //sh('git push -f origin refs/tags/${GIT_TAG}') 
 		    //sh('git push https://${pass}:${user}@<REPO> --tags')
 		  }
       }
@@ -24,6 +25,7 @@ pipeline {
             steps {
 		   // giturl_push = ${GIT_URL}.split("//")[1]
 		   // echo "Git UrL: ${giturl_push}"
+		    echo scm.getUserRemoteConfigs()[0].getUrl()
 		    echo "Tagging: ${GIT_TAG}"  
 		    echo "BUILD_NUMBER :: ${BUILD_NUMBER}"
                    echo "BUILD_ID :: ${BUILD_ID}"
