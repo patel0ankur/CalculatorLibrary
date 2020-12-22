@@ -3,7 +3,7 @@ pipeline {
   environment {
         // BUILDDATE = currentDate.format("yyyy-MM-dd")
         //def jobBaseName = "${env.JOB_NAME}".split('/').last()
-        GIT_TAG = "$JOB_NAME-$GIT_BRANCH-$BUILD_TIMESTAMP-$BUILD_NUMBER"
+        GIT_TAG = "$JOB_NAME-$BUILD_TIMESTAMP-$BUILD_NUMBER"
                 
     }
   
