@@ -13,12 +13,15 @@ pipeline {
     stage('Cloning Git') {
       steps {
 	    //sh('git tag -f -a ${GIT_TAG} -m "tagging"')
-	    withCredentials([usernamePassword(credentialsId: 'GitHub', passwordVariable: 'pass', usernameVariable: 'user')]) {
-		   sh('git tag -f -a ${GIT_TAG} -m "tagging"')
+	    sshagent(['Jenkins_server1']) {
+    		   sh('git tag -f -a ${GIT_TAG} -m "tagging"')
 		   sh('git tag -l')
 		   //sh('git push -f origin refs/tags/${GIT_TAG}') 
 		    sh('git push http://${pass}:${user}@${repositoryUrl} refs/tags/${GIT_TAG}')
-		  }
+}
+	    //withCredentials([usernamePassword(credentialsId: 'GitHub', passwordVariable: 'pass', usernameVariable: 'user')]) {
+
+		//  }
       }
     }
     stage('Tagging') {
