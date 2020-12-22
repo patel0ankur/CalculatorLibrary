@@ -17,7 +17,7 @@ pipeline {
 		   sh('git tag -f -a ${GIT_TAG} -m "tagging"')
 		   sh('git tag -l')
 		   //sh('git push -f origin refs/tags/${GIT_TAG}') 
-		    sh('git push https://${pass}:${user}@${repositoryUrl} refs/tags/${GIT_TAG}')
+		    sh('git push http://${pass}:${user}@${repositoryUrl} refs/tags/${GIT_TAG}')
 		  }
       }
     }
