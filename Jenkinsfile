@@ -15,10 +15,10 @@ pipeline {
     stage('Cloning Git') {
       steps {
         git credentialsId: 'GitHub', url: 'https://github.com/patel0ankur/CalculatorLibrary.git'
-	    //sh('git tag -f -a ${GIT_TAG} -m "tagging"')
-	    //withCredentials([usernamePassword(credentialsId: 'GitHub', passwordVariable: 'pass', usernameVariable: 'user')]) {
-           //sh('git push origin ${GIT_TAG}') 
-//}
+	    sh('git tag -f -a ${GIT_TAG} -m "tagging"')
+	    withCredentials([usernamePassword(credentialsId: 'GitHub', passwordVariable: 'pass', usernameVariable: 'user')]) {
+           sh('git push origin ${GIT_TAG}') 
+}
 	    //sh('git tag ${BUILD_TAG}') 
             //sh('git push origin ${BUILD_TAG}')   
               
