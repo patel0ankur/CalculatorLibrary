@@ -21,8 +21,8 @@ pipeline {
     }
     stage('Tagging') {
             steps {
-		    //giturl_push = $GIT_URL.split("//")[1]
-		    echo "Git UrL: ${GIT_URL}.split("//")[1]"
+		    giturl_push = ${GIT_URL}.split("//")[1]
+		    echo "Git UrL: ${giturl_push}"
 		    echo "Tagging: ${GIT_TAG}"  
 		    echo "BUILD_NUMBER :: ${BUILD_NUMBER}"
                    echo "BUILD_ID :: ${BUILD_ID}"
